@@ -1,0 +1,152 @@
+:root {
+  --sky-top: #82b4fa;
+  --sky-bottom: #09152f;
+  --red: #ff3d35;
+  --white: #f5f7ff;
+  --blue-line: rgba(222, 237, 255, .45);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--sky-bottom);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body { cursor: crosshair; }
+canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+
+.hud {
+  position: fixed;
+  z-index: 2;
+  inset: 0;
+  padding: 22px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.topline, .bottomline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.logo { font-weight: 900; font-size: 12px; letter-spacing: .25em; }
+.status { color: #dce9ff; }
+
+.progress-panel {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(280px, 45vw);
+}
+
+.progress-copy {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#percent { font-size: 12px; font-variant-numeric: tabular-nums; }
+.progress-track {
+  height: 3px;
+  background: rgba(255,255,255,.25);
+  overflow: hidden;
+}
+.progress-fill {
+  width: 12%;
+  height: 100%;
+  background: var(--red);
+  box-shadow: 0 0 12px rgba(255,61,53,.65);
+  transition: width .16s linear;
+}
+
+.bottomline { align-items: flex-end; color: #d4e2ff; }
+#fuelLabel { color: var(--white); }
+#tapCount { font-variant-numeric: tabular-nums; }
+
+#tapZone {
+  position: fixed;
+  z-index: 4;
+  left: 50%;
+  bottom: 8.5%;
+  transform: translateX(-50%);
+  width: 74px;
+  height: 74px;
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 50%;
+  background: rgba(9,21,47,.28);
+  color: white;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: transform .12s, background .2s, border-color .2s;
+  -webkit-tap-highlight-color: transparent;
+}
+#tapZone:hover { background: rgba(255,61,53,.8); border-color: var(--red); }
+#tapZone:active { transform: translateX(-50%) scale(.9); }
+.tap-ring {
+  position: absolute;
+  inset: -7px;
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 50%;
+  animation: pulse 1.8s ease-out infinite;
+}
+.tap-label { font-size: 10px; font-weight: 800; letter-spacing: .2em; }
+
+@keyframes pulse {
+  0% { transform: scale(.85); opacity: .8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+.almost-overlay {
+  position: fixed;
+  z-index: 3;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(5, 13, 32, 0);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .8s, background .8s;
+}
+.almost-overlay.show {
+  opacity: 1;
+  background: rgba(5, 13, 32, .2);
+}
+.almost-text {
+  font-size: clamp(30px, 8vw, 94px);
+  font-weight: 900;
+  letter-spacing: -.07em;
+  text-transform: uppercase;
+  text-shadow: 0 0 30px rgba(255,255,255,.22);
+  transform: translateY(10px);
+  transition: transform .8s;
+}
+.almost-overlay.show .almost-text { transform: translateY(0); }
+
+@media (max-width: 600px) {
+  .hud { padding: 16px; }
+  .progress-panel { top: 55px; width: min(250px, 70vw); }
+  .topline, .bottomline { font-size: 8px; }
+  #tapZone { bottom: 10%; width: 68px; height: 68px; }
+}

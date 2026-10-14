@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Almost There</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="scene" aria-label="An endless geometric road with repeating suns"></canvas>
+
+  <main class="hud">
+    <div class="topline">
+    </div>
+
+    <section class="progress-panel" aria-live="polite">
+      <div class="progress-copy">
+        <span id="message">YOUR FUTURE</span>
+        <span id="percent">12.0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </section>
+
+    <div class="bottomline">
+      <span id="fuelLabel">TAP TO MOVE FORWARD！</span>
+      <span id="tapCount">TAPS 000</span>
+    </div>
+  </main>
+
+  <button id="tapZone" aria-label="Tap to move forward">
+    <span class="tap-ring"></span>
+    <span class="tap-label">TAP</span>
+  </button>
+
+  <div class="almost-overlay" id="almostOverlay" aria-hidden="true">
+    <div class="almost-text">ALMOST THERE!</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
